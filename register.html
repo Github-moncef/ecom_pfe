@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style2.css">
+    <title>Register</title>
+</head>
+<body>
+    <div class="container">
+        <div class="box form-box">
+            <header>Sign Up</header>
+            <form id="register-form" action="" method="post">
+                <div class="field input">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" autocomplete="off" required>
+                </div>
+
+                <div class="field input">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" autocomplete="off" required>
+                </div>
+
+                <div class="field input">
+                    <label for="age">Age</label>
+                    <input type="number" name="age" id="age" autocomplete="off" required>
+                </div>
+                <div class="field input">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" autocomplete="off" required>
+                </div>
+
+                <div class="field">
+                    <input type="submit" class="btn" name="submit" value="Register" required>
+                </div>
+                <div class="links">
+                    Already a member? <a href="index.html">Sign In</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+		$(document).ready(function(){
+			$("#register-form").submit(function(e){
+				e.preventDefault();
+				var formData = new FormData(this);
+				$.ajax({
+					url: "http://localhost/backend/register.php",
+					type: "POST",
+					data: formData,
+					cache: false,
+					contentType: false,
+					processData: false,
+                    mode:'no-cors',
+					success: function(data){
+						if(data == "success"){
+							window.location.href = "index.html";
+						} else {
+                            alert("Email Already exists");
+                        }
+					}
+				});
+			});
+		});
+
+	</script>
+</body>
+</html>
